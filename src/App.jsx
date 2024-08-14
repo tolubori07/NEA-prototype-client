@@ -13,9 +13,9 @@ const App = () => {
       <main className="min-h-screen bg-bg pb-12">
         <Suspense fallback={<Loading/>}>
         <Routes>
-          <Route path="/donor" element={<Donordashboard/>} />
-          <Route path="/donor/manageappointment" element={<Manageappointments/>} />
-          <Route path="/donor/profile" element={<Profile/>} />
+          <Route path="/" element={<Donordashboard/>} />
+          <Route path="/manageappointment" element={<Manageappointments/>} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="*" element={<ErrorPage />}/>
         </Routes>
         </Suspense>
