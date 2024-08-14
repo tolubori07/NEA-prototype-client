@@ -13,7 +13,7 @@ const DonorDashboard = () => {
         <div className="nextappointment bg-white p-10 shadow-dark mt-12 w-[70%] rounded-base border-2 border-black">
           <div className="flex justify-between">
             <h1 className="text-text text-3xl font-body font-heading">Your next appointment...</h1>
-           <Link to="/donor/manageappointment"><Button children="Manage appointment" className="p-3 text-white font-body font-bold" /></Link>
+           <Link to="/manageappointment"><Button children="Manage appointment" className="p-3 text-white font-body font-bold" /></Link>
           </div>
           <h3 className="font-body text-text font-heading text-3xl mt-12 text-center">Date: Monday, 24th June 2025</h3>
           <h3 className="font-body text-text font-heading text-3xl mt-6 text-center">Time: 4:00 pm</h3>
