@@ -1,11 +1,15 @@
-import { Suspense, lazy} from "react"
+import { Suspense, lazy, useContext,useState, useEffect} from "react"
+import { getUserAppointments } from "../../api/appointmentService";
+import { AuthContext } from "../../api/Authcontext";
 
-const Alert = lazy(() => import("../components/Alerts"));
-const Header = lazy(() => import("../components/DonorHeader"));
-const Button = lazy(()=>import("../components/Button"))
+const Alert = lazy(() => import("../../components/Alerts"));
+const Header = lazy(() => import("../../components/DonorHeader"));
+const Button = lazy(()=>import("../../components/Button"))
 const ManageAppointments = () => {
+  
+     
   return (
-    <div className="">
+   <div className="">
       <Suspense>
         <Header />
       </Suspense>

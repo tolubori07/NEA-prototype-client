@@ -41,7 +41,7 @@ export default {
     },
   },
     fontFamily: {
-      'display': ['"Chunky Retro"'],
+      'display': ['"Cheorcy"'],
       'body': ['SF Compact Display'],
     }
 },

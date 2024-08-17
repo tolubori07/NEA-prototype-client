@@ -1,14 +1,22 @@
-import { lazy } from "react"
-import { Link } from "react-router-dom"
+import { lazy, useContext, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../api/Authcontext"
 
-const Button = lazy(() => import("../components/Button"))
-const Header = lazy(() => import("../components/DonorHeader"))
-
+const Button = lazy(() => import("../../components/Button"))
+const Header = lazy(() => import("../../components/DonorHeader"))
 const DonorDashboard = () => {
+const navigate = useNavigate()
+const user = JSON.parse(useContext(AuthContext)) 
+ useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigate('/dlogin')
+    }
+  }, [user,navigate])
+
   return (
     <div>
       <Header />
-      <h1 className="text-3xl font-body font-heading text-text ml-14 mt-12">Welcome, User</h1>
+      <h1 className="text-3xl font-body font-heading text-text ml-14 mt-12">Welcome, {user.firstname}</h1>
       <div className="flex justify-center">
         <div className="nextappointment bg-white p-10 shadow-dark mt-12 w-[70%] rounded-base border-2 border-black">
           <div className="flex justify-between">
