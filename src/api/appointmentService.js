@@ -17,3 +17,19 @@ export const getUserAppointments=async(token)=>{
   console.error(error)
  }
 }
+
+
+export const getNextAppointment = async(token)=>{ 
+  try{ 
+    const config ={
+      headers:{ 
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const response = await axios.get("http://localhost:3000/nextAppointment",config)
+    return response
+  }catch(error){ 
+    console.error(error)
+  }
+}

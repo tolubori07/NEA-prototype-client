@@ -26,6 +26,8 @@ const AllAppointments = () => {
     getAppointment();
   }, []); // Empty dependency array to run the effect only once
 
+    console.table(appointments[0])
+
   if (loading) {
     return <Loading />;
   }

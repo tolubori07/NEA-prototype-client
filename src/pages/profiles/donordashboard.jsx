@@ -1,35 +1,50 @@
-import { lazy, useContext, useEffect } from "react"
+import { lazy, useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../api/Authcontext"
+import { getNextAppointment } from "../../api/appointmentService"
 
 const Button = lazy(() => import("../../components/Button"))
 const Header = lazy(() => import("../../components/DonorHeader"))
+const Appointment = lazy(() => import("../../components/Appointment"))
+
 const DonorDashboard = () => {
-const navigate = useNavigate()
-const user = JSON.parse(useContext(AuthContext)) 
- useEffect(() => {
+  const navigate = useNavigate()
+  const user = useContext(AuthContext) // No need to parse, useContext returns the context value directly
+  const [appointment, setAppointment] = useState({}) // useState to manage state, not useEffect
+
+  const getNext = async () => {
+    const token = user.token
+    const appointmentData = await getNextAppointment(token) // Await the API call
+    setAppointment(appointmentData)
+  }
+
+  useEffect(() => {
     if (!localStorage.getItem('user')) {
       navigate('/dlogin')
+    } else { 
+      getNext() // Call the function directly, no need for additional variable
     }
-  }, [user,navigate])
+  }, [user, navigate])
 
   return (
     <div>
       <Header />
-      <h1 className="text-3xl font-body font-heading text-text ml-14 mt-12">Welcome, {user.firstname}</h1>
+      <h1 className="text-3xl font-body font-heading text-text ml-14 mt-12">
+        Welcome, {user.firstname}
+      </h1>
       <div className="flex justify-center">
         <div className="nextappointment bg-white p-10 shadow-dark mt-12 w-[70%] rounded-base border-2 border-black">
           <div className="flex justify-between">
             <h1 className="text-text text-3xl font-body font-heading">Your next appointment...</h1>
-           <Link to="/manageappointment"><Button children="Manage appointment" className="p-3 text-white font-body font-bold" /></Link>
+            <Link to="/manageappointment">
+              <Button className="p-3 text-white font-body font-bold">Manage appointment</Button>
+            </Link>
           </div>
-          <h3 className="font-body text-text font-heading text-3xl mt-12 text-center">Date: Monday, 24th June 2025</h3>
-          <h3 className="font-body text-text font-heading text-3xl mt-6 text-center">Time: 4:00 pm</h3>
-          <h3 className="font-body text-main font-heading text-2xl mt-6 text-center">Donation Centre: 4:00 pm</h3>
-          <h3 className="font-body text-main font-heading text-2xl mt-6 text-center">Location: Belmont Road, Etruria, Stoke-on-Trent, ST1 4BT
-            <br />
-            (Click to view on map)
-          </h3>
+          {appointment ? (
+            <Appointment user={user} appointment={appointment}/>
+            ) : (
+            <h3 className="font-body text-text font-heading text-3xl mt-12 text-center">No upcoming appointments</h3>
+          )}
         </div>
       </div>
       <h3 className="font-body text-text font-heading text-4xl mt-6 text-center">Essential Information</h3>
@@ -46,3 +61,4 @@ const user = JSON.parse(useContext(AuthContext))
 }
 
 export default DonorDashboard
+

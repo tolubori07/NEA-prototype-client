@@ -2,6 +2,7 @@ import { lazy, useState, useContext, useEffect } from 'react'
 import { AuthContext } from '../../api/Authcontext'
 import { logout } from '../../api/authservice'
 import { useNavigate } from 'react-router-dom'
+import { getNextAppointment } from '../../api/appointmentService'
 
 const Input = lazy(() => import('../../components/Input'))
 const Modal = lazy(() => import('../../components/Modal'))
@@ -14,10 +15,11 @@ const Profile = () => {
   const [isModalActive, setIsModalActive] = useState(false)
   const navigate = useNavigate()
   useEffect(() => {
+
     if (!user) {
       navigate('/dlogin')
     }
-  }, [user,navigate])
+  }, [user, navigate])
   return (
     <>
       <Header />
