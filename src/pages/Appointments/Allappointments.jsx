@@ -26,7 +26,6 @@ const AllAppointments = () => {
     getAppointment();
   }, []); // Empty dependency array to run the effect only once
 
-    console.table(appointments[0])
 
   if (loading) {
     return <Loading />;
@@ -34,7 +33,7 @@ const AllAppointments = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-<Header/>
+      <Header />
       {appointments.length > 0 ? (
         appointments.map((appointment) => (
           <Appointment key={appointment.ID} user={user} appointment={appointment} />

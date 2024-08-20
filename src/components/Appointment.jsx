@@ -1,11 +1,11 @@
 import { lazy } from "react"
 import { Link } from "react-router-dom"
 const Button = lazy(() => import('../components/Button'))
-const Header = lazy(() => import('../components/DonorHeader'))
-const Appointment = ({ user, appointment }) => {
+const Appointment = ({ user, appointment,children,className }) => {
   const date = new Date(appointment.Date)
   const time = new Date(appointment.Time)
   const location = appointment.Donation_Centre
+  console.log(appointment)
   const days = [
     "Sunday",
     "Monday",
@@ -32,8 +32,9 @@ const Appointment = ({ user, appointment }) => {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="nextappointment bg-white p-10 shadow-dark mt-12 w-[70%] rounded-base border-2 border-black">
+        <div className={`nextappointment bg-white p-10 shadow-dark mt-12 w-[70%] rounded-base border-2 border-black ${className}`}>
           <div className="flex justify-between">
+            {children}
             <Link to="/manageappointment"><Button children="Manage appointment" className="p-3 text-white font-body font-bold" /></Link>
           </div>
           <h3 className="font-body text-text font-heading text-3xl mt-12 text-center">Date: {`${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`}</h3>
