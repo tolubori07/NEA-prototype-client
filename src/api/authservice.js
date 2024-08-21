@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_URL = "http://localhost:3000"
+const API_URL = "https://nea-backend-api.onrender.com"
 
 export const login = async (userData) => {
   try {

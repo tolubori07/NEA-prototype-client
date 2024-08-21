@@ -9,6 +9,7 @@ const Profile = lazy(()=>import('./pages/profiles/Profile'))
 const SearchAppointment = lazy(()=>import('./pages/Appointments/SearchAppointment'))
 const Dlogin = lazy(()=>import('./pages/Auth/Dlogin'))
 const Allappointments = lazy(()=>import('./pages/Appointments/Allappointments'))
+const BookAppointments = lazy(()=>import('./pages/Appointments/BookAppointments'))
 const App = () => {
   return (
     <Router>
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/appointments" element={<Allappointments/>} />
           <Route path="*" element={<ErrorPage />}/>
           <Route path="/dlogin" element={<Dlogin/>} />
+          <Route path="/book/:id" element={<BookAppointments/>} />
         </Routes>
         </Suspense>
       </main>

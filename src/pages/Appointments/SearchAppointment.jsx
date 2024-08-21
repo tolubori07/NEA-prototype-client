@@ -1,6 +1,7 @@
 import { lazy, useState, useEffect } from "react";
 import { getCentres } from "../../api/appointmentService";
 import { Heading1 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SearchBar = lazy(() => import("../../components/SearchBar"));
 const Header = lazy(() => import('../../components/DonorHeader'));
@@ -52,7 +53,7 @@ const SearchAppointment = () => {
           
           {centres.length>0?centres.map((centre, index) => (
             <div key={index} className="bg-white shadow-dark w-full max-w-lg border-2 border-black text-center rounded-lg p-5">
-              <h1 className="text-main text-2xl font-heading">{centre.Name}</h1>
+              <Link to={`/book/${centre.ID}`}><h1 className="text-main text-2xl font-heading">{centre.Name}</h1></Link>
               <h2 className="text-text text-lg font-body">
                 {centre.Address}, {centre.City}, {centre.Postcode}
               </h2>
