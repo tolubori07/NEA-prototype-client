@@ -1,13 +1,16 @@
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
-const Select = ({ items, className }) => {
+const Select = ({ items, className, onSelect }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isActiveSelect, setIsActiveSelect] = useState(false);
 
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
     setIsActiveSelect(false);
+    if (onSelect) {
+      onSelect(itemName);  // Invoke the callback with the selected item
+    }
   };
 
   return (
