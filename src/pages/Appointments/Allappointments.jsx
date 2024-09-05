@@ -2,6 +2,7 @@ import { Suspense, lazy, useContext, useState, useEffect } from "react";
 import { getUserAppointments } from "../../api/appointmentService";
 import { AuthContext } from "../../api/Authcontext";
 import Loading from '../../Loading';
+import { useNavigate } from "react-router-dom";
 
 const Appointment = lazy(() => import('../../components/Appointment'));
 const Header = lazy(() => import('../../components/DonorHeader'));
@@ -10,7 +11,7 @@ const AllAppointments = () => {
   const user = JSON.parse(useContext(AuthContext));
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true); // State to handle loading
-
+  const navigate = useNavigate()
   const getAppointment = async () => {
     try {
       const res = await getUserAppointments(user.token);
@@ -24,7 +25,10 @@ const AllAppointments = () => {
 
   useEffect(() => {
     getAppointment();
-  }, []); // Empty dependency array to run the effect only once
+    if(!user){ 
+      navigate('/dlogin')
+    }
+  }, [navigate,user]); // Empty dependency array to run the effect only once
 
 
   if (loading) {

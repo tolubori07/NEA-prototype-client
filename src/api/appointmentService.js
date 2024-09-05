@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://nea-backend-api.onrender.com/appointments";
+const url = "http://localhost:3000";
 
 export const getUserAppointments = async (token) => {
   try {
@@ -27,7 +27,7 @@ export const getNextAppointment = async (token) => {
       }
     }
 
-    const response = await axios.get("https://nea-backend-api.onrender.com/nextAppointment", config)
+    const response = await axios.get("http://localhost:3000/nextAppointment", config)
     return response.data
   } catch (error) {
     console.error(error)
@@ -53,7 +53,7 @@ export const getCentres = async (city) => {
 
 export const getCentre = async (id) => {
   try {
-    const response = await axios.get(`https://nea-backend-api.onrender.com/getcentre?id=${id}`, { crossDomain: true })
+    const response = await axios.get(`http://localhost:3000/getcentre?id=${id}`, { crossDomain: true })
     return response.data
   } catch (error) {
     console.error(error)
@@ -63,7 +63,7 @@ export const getCentre = async (id) => {
 
 export const getAvailableTimes = async (date, id) => {
   try {
-    const response = await axios.get(`https://nea-backend-api.onrender.com/availableSlots?date=${date}&id=${id}`, { crossDomain: true });
+    const response = await axios.get(`http://localhost:3000/availableSlots?date=${date}&id=${id}`, { crossDomain: true });
     return response.data
   } catch (error) {
     console.error(error)
@@ -87,7 +87,7 @@ export const createAppointment = async (date, time, centre, token) => {
 
     // Make the POST request to create an appointment
     const response = await axios.post(
-      `https://nea-backend-api.onrender.com/appointments`,
+      `http://localhost:3000/appointments`,
       { date, time, centre },
       config
     );
